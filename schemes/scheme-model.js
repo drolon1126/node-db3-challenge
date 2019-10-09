@@ -27,6 +27,12 @@ function findById(id) {
     });
 }
 
+function findStepById(id) {
+  return db('steps')
+    .where({ id })
+    .first()
+}
+
 function findSteps(id){
   return db('steps')
     .join('schemes', 'schemes.id', 'steps.scheme_id')
@@ -47,7 +53,10 @@ function addStep(step, id){
   let stepData = step;
   stepData.scheme_id = Number(id);
   return db('steps')
-    .insert(stepData);
+    .insert(stepData)
+    .then(s=>{
+      return findStepById(s[0]);
+    });
 }
 
 function update(changes, id) {
