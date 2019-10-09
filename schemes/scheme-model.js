@@ -47,10 +47,7 @@ function addStep(step, id){
   let stepData = step;
   stepData.scheme_id = Number(id);
   return db('steps')
-    .insert(stepData)
-    .then(ids=>{
-      return ids;
-    });
+    .insert(stepData);
 }
 
 function update(changes, id) {
